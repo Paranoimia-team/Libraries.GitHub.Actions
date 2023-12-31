@@ -1,0 +1,12 @@
+name: setup
+description: 'prepare environment'
+runs:
+  using: composite
+  steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: install pnpm
+      shell: bash
+      run: |
+        npm i pnpm -g
