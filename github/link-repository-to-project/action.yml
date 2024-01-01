@@ -1,0 +1,25 @@
+name: 'Link repository to project' 
+description: 'Links repository to project with GitHub GraphQL API'
+inputs:
+  repository:
+    required: true
+    description: 'Repository ID'
+  project:
+    required: true
+    description: 'Project ID'
+  token:
+    required: true
+    description: 'GitHub token'
+  
+runs:
+  using: composite
+  steps:
+
+  - name: 'Link API'
+    shell: bash
+    run: |
+      curl -X POST \
+      -H "Authorization: Bearer ${{ inputs.token }}" \
+      -H "Content-Type: application/json" \
+      https://api.github.com/graphql \
+      --data '{ "query": "mutation { linkRepositoryToProject(input: { projectId: \"${{ inputs.project }}\", repositoryId: \"${{ inputs.repository }}\" }) { clientMutationId project { id } repository { id } } }" }'

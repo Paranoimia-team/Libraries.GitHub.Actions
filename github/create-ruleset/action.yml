@@ -1,0 +1,33 @@
+name: 'Create ruleset' 
+description: 'Creates ruleset in repository'
+inputs:
+  api-version:
+    description: 'Version of API to use'
+    default: '2022-11-28'
+  token:
+    required: true
+    description: 'GitHub token'
+  owner: 
+    required: true
+    description: 'Owner of repository'
+  repository:
+    required: true
+    description: 'Repository name'
+  ruleset-path:
+    required: true
+    description: 'Path to JSON with ruleset'
+  
+runs:
+  using: composite
+  steps:
+
+  - name: 'API call'
+    shell: bash
+    run: |
+      curl -L \
+      -X POST \
+      -H "Accept: application/vnd.github+json" \
+      -H "Authorization: Bearer ${{ inputs.token }}" \
+      -H "X-GitHub-Api-Version: ${{ inputs.api-version }}" \
+      https://api.github.com/repos/${{ inputs.owner }}/${{ inputs.repository }}/rulesets \
+      --data "@${{ inputs.ruleset-path }}"
