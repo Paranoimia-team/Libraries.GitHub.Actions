@@ -1,0 +1,34 @@
+name: 'Get project node id' 
+description: 'Retrieves project node id by its number in organization'
+inputs:
+
+  token:
+    required: true
+    description: 'GitHub token'
+  organization:
+    required: true
+    description: 'Organization login'
+  project:
+    required: true
+    description: "Project's number in organization"
+
+outputs:
+  node-id:
+    description: "Project's node_id"
+    value: ${{ steps.api_call.outputs.result }}
+
+runs:
+  using: composite
+  steps:
+
+  - name: 'API call'
+    id: api_call
+    shell: bash
+    run: |
+      result=$(curl -X POST \
+      -H "Authorization: Bearer ${{ inputs.token }}" \
+      -H "Content-Type: application/json" \
+      https://api.github.com/graphql \
+      --data '{ "query": "query { organization(login: ${{ inputs.organization }}) { projectV2(number: ${{ inputs.project }} ) { id } } }" }')
+
+      "result=$result" >> "$GITHUB_OUTPUT"
