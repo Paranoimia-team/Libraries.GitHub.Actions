@@ -23,10 +23,11 @@ expression=$(IFS='+'; echo "${expressions[*]}")
 
 body=$(
   jq \
+    -n \
     --arg name "$name" \
     --arg description "$description" \
     --arg delete_branch_on_merge "$delete_branch_on_merge" \
-    $expression \
+    "$expression" \
 )
 
 echo "Body"
@@ -38,6 +39,6 @@ curl \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $token" \
   -H "X-GitHub-Api-Version: $api_version" \
-  https://api.github.com/repos/OWNER/REPO \
+  https://api.github.com/repos/$owner/$repository \
   -d "$body" \
   -v
