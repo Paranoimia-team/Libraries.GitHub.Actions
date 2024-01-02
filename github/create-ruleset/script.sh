@@ -18,4 +18,4 @@ curl \
     -H "Authorization: Bearer $token" \
     -H "X-GitHub-Api-Version: $api_version" \
     https://api.github.com/repos/$owner/$repository/rulesets \
-    --json "@$ruleset_path"
+    -d "@$ruleset_path"
