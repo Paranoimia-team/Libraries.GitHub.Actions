@@ -1,7 +1,7 @@
 name: 'Add repository to team' 
 description: 'Adds repository to team with GitHub API'
 inputs:
-  api-version:
+  api_version:
     description: 'Version of API to use'
     default: '2022-11-28'
   token:
@@ -16,7 +16,7 @@ inputs:
   organization:
     required: true
     description: 'The organization name. The name is not case sensitive.'
-  team-slug:
+  team_slug:
     required: true
     description: 'The slug of the team name.'
   permission:
@@ -40,7 +40,7 @@ runs:
       -X PUT \
       -H "Accept: application/vnd.github+json" \
       -H "Authorization: Bearer ${{ inputs.token }}" \
-      -H "X-GitHub-Api-Version: ${{ inputs.api-version }}" \
-      https://api.github.com/orgs/${{ inputs.organization }}/teams/${{ inputs.team-slug }}/repos/${{ inputs.owner }}/${{ inputs.owner }} \
+      -H "X-GitHub-Api-Version: ${{ inputs.api_version }}" \
+      https://api.github.com/orgs/${{ inputs.organization }}/teams/${{ inputs.team_slug }}/repos/${{ inputs.owner }}/${{ inputs.owner }} \
       -d '{"permission":"${{ inputs.permission }}"}'
   

@@ -13,7 +13,7 @@ inputs:
     description: "Project's number in organization"
 
 outputs:
-  node-id:
+  node_id:
     description: "Project's node_id"
     value: ${{ steps.api_call.outputs.result }}
 
