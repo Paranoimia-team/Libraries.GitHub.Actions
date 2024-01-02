@@ -19,6 +19,6 @@ runs:
     shell: bash
     run: |
       . ${GITHUB_ACTION_PATH}/script.sh \
-        -token ${{ inputs.token }} \
-        -repository ${{ inputs.repository }} \
-        -project ${{ inputs.project }}
+        --token "${{ inputs.token }}" \
+        --repository "${{ inputs.repository }}" \
+        --project "${{ inputs.project }}"

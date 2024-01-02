@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-while getopts repository:project:token: flag
-do
-    case "${flag}" in
-        repository) repository=${OPTARG};;
-        project) project=${OPTARG};;
-        token) token=${OPTARG};;
-    esac
+while [ $# -gt 0 ] ; do
+  case $1 in
+    --repository) repository=$2;;
+    --project) project=$2;;
+    --token) token=$2;;
+  esac
+  shift
 done
 
 get_query()
