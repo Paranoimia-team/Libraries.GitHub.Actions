@@ -30,4 +30,4 @@ runs:
       -H "Authorization: Bearer ${{ inputs.token }}" \
       -H "X-GitHub-Api-Version: ${{ inputs.api_version }}" \
       https://api.github.com/repos/${{ inputs.owner }}/${{ inputs.repository }}/rulesets \
-      --data "@${{ inputs.ruleset-path }}"
+      --data "@${{ inputs.ruleset_path }}"
