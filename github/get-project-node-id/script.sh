@@ -26,21 +26,27 @@ EOF
 }
 
 get_body()
-{
+{  
 cat <<EOF
     {
-        "query": "$(get_query)"
+        "query": $(get_query | tr -d '\n' | tr -d ' ' | jq -Rs)
     }
 EOF
 }
+
+body=$(get_body | jq -c)
+
+echo "Body"
+echo $body
 
 result=$( \
     curl \
         -X POST \
         -H "Authorization: Bearer $token" \
         https://api.github.com/graphql \
-        -d '$(get_body)' \
+        -d '$body' \
         -v
 )
 
-"result=$result" >> "$GITHUB_OUTPUT"
+OUTPUT=$GITHUB_OUTPUT
+"result=$result" | tee -a "$OUTPUT"
