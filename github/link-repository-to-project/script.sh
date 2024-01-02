@@ -18,8 +18,8 @@ cat <<EOF
         (
             input: 
             { 
-                projectId: \"$project\", 
-                repositoryId: \"$repository\" 
+                projectId: "$project", 
+                repositoryId: "$repository"
             }
         ) 
         { 
@@ -35,7 +35,7 @@ get_body()
 {
 cat <<EOF
     {
-        "query": "$(get_query | tr -d '\n' | tr -d ' ' | jq -Rs)"
+        "query": $(get_query | jq -Rs)
     }
 EOF
 }
