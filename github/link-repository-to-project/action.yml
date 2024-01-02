@@ -18,8 +18,7 @@ runs:
   - name: 'Link API'
     shell: bash
     run: |
-      curl -X POST \
-      -H "Authorization: Bearer ${{ inputs.token }}" \
-      -H "Content-Type: application/json" \
-      https://api.github.com/graphql \
-      --data '{ "query": "mutation { linkRepositoryToProject(input: { projectId: \"${{ inputs.project }}\", repositoryId: \"${{ inputs.repository }}\" }) { clientMutationId project { id } repository { id } } }" }'
+      . ${GITHUB_ACTION_PATH}/script.sh \
+        -token ${{ inputs.token }} \
+        -repository ${{ inputs.repository }} \
+        -project ${{ inputs.project }}
