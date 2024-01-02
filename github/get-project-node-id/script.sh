@@ -14,7 +14,7 @@ get_query()
 cat <<EOF
     query 
     { 
-        organization(login: $organization) 
+        organization(login: "$organization") 
         { 
             projectV2(number: $project) 
             { 

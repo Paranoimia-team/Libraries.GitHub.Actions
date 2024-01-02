@@ -14,7 +14,7 @@ while [ $# -gt 0 ] ; do
   shift
 done
 
-body=$([ -z "$permission" ] && echo '{}' || echo '{"permission":"$permission"}')
+body=$([ -z "$permission" ] && echo '{}' || echo "{\"permission\":\"$permission\"}")
 
 echo "Body"
 echo $body
