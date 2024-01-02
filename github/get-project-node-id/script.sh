@@ -40,6 +40,7 @@ result=$( \
         -H "Authorization: Bearer $token" \
         https://api.github.com/graphql \
         -d $(get_body) \
+        -v
 )
 
 "result=$result" >> "$GITHUB_OUTPUT"
