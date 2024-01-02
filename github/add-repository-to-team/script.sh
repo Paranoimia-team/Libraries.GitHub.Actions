@@ -26,5 +26,5 @@ curl \
     -H "Authorization: Bearer $token" \
     -H "X-GitHub-Api-Version: $api_version" \
     https://api.github.com/orgs/$organization/teams/$team_slug/repos/$owner/$repository \
-    -d $body \
+    -d "$body" \
     -v

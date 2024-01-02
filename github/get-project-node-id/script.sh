@@ -39,14 +39,18 @@ body=$(get_body | jq -c)
 echo "Body"
 echo $body
 
-result=$( \
+response=$( \
     curl \
         -X POST \
         -H "Authorization: Bearer $token" \
         https://api.github.com/graphql \
-        -d '$body' \
+        -d "$body" \
         -v
 )
 
-OUTPUT=$GITHUB_OUTPUT
-"result=$result" | tee -a "$OUTPUT"
+node_id=$(echo $response | jq -r ".data.organization.projectV2.id")
+
+echo "Node id:$node_id;"
+
+echo "GitHub output:$GITHUB_OUTPUT;"
+echo "node_id=$node_id" >> "$GITHUB_OUTPUT"
