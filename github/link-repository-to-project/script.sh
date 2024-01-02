@@ -45,4 +45,4 @@ curl \
     -H "Authorization: Bearer $token" \
     -H "Content-Type: application/json" \
     https://api.github.com/graphql \
-    --data $(get_body)
+    -d $(get_body)
