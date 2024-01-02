@@ -35,15 +35,20 @@ get_body()
 {
 cat <<EOF
     {
-        "query": "$(get_query)"
+        "query": "$(get_query | tr -d '\n' | tr -d ' ' | jq -Rs)"
     }
 EOF
 }
+
+body=$(get_body | jq -c)
+
+echo "Body"
+echo $body
 
 curl \
     -X POST \
     -H "Authorization: Bearer $token" \
     -H "Content-Type: application/json" \
     https://api.github.com/graphql \
-    -d $(get_body) \
+    -d $body \
     -v

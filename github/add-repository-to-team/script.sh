@@ -14,7 +14,10 @@ while [ $# -gt 0 ] ; do
   shift
 done
 
-data=$([ -z "$permission" ] && echo '{}' || echo '{"permission":"$permission"}')
+body=$([ -z "$permission" ] && echo '{}' || echo '{"permission":"$permission"}')
+
+echo "Body"
+echo $body
 
 curl \
     -L \
@@ -23,5 +26,5 @@ curl \
     -H "Authorization: Bearer $token" \
     -H "X-GitHub-Api-Version: $api_version" \
     https://api.github.com/orgs/$organization/teams/$team_slug/repos/$owner/$repository \
-    -d $data \
+    -d $body \
     -v
