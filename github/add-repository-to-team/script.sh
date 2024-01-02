@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
-while getopts owner:organization:token:api_version:team_slug:repository:permission: flag
-do
-    case "${flag}" in
-        owner) owner=${OPTARG};;
-        organization) organization=${OPTARG};;
-        token) token=${OPTARG};;
-        api_version) api_version=${OPTARG};;
-        team_slug) team_slug=${OPTARG};;
-        owner) owner=${OPTARG};;
-        repository) repository=${OPTARG};;
-        permission) permission=${OPTARG};;
-    esac
+while [ $# -gt 0 ] ; do
+  case $1 in
+    --owner) owner=$2;;
+    --organization) organization=$2;;
+    --token) token=$2;;
+    --api_version) api_version=$2;;
+    --team_slug) team_slug=$2;;
+    --owner) owner=$2;;
+    --repository) repository=$2;;
+    --permission) permission=$2;;
+  esac
+  shift
 done
 
 data=$([ -z "$permission" ] && echo '{}' || echo '{"permission":"$permission"}')

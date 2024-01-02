@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-while getopts owner:repository:token:api_version:ruleset_path: flag
-do
-    case "${flag}" in
-        owner) owner=${OPTARG};;
-        repository) repository=${OPTARG};;
-        token) token=${OPTARG};;
-        api_version) api_version=${OPTARG};;
-        ruleset_path) ruleset_path=${OPTARG};;
-    esac
+while [ $# -gt 0 ] ; do
+  case $1 in
+    --owner) owner=$2;;
+    --repository) repository=$2;;
+    --token) token=$2;;
+    --api_version) api_version=$2;;
+    --ruleset_path) ruleset_path=$2;;
+  esac
+  shift
 done
 
 curl \

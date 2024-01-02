@@ -37,11 +37,11 @@ runs:
     shell: bash
     run: |
       . ${GITHUB_ACTION_PATH}/script.sh \
-        -api_version ${{ inputs.api_version }} \
-        -token ${{ inputs.token }} \
-        -owner ${{ inputs.owner }} \
-        -repository ${{ inputs.repository }} \
-        -organization ${{ inputs.organization }} \
-        -team_slug ${{ inputs.team_slug }} \
-        -permission ${{ inputs.permission }}
+        --api_version "${{ inputs.api_version }}" \
+        --token "${{ inputs.token }}" \
+        --owner "${{ inputs.owner }}" \
+        --repository "${{ inputs.repository }}" \
+        --organization "${{ inputs.organization }}" \
+        --team_slug "${{ inputs.team_slug }}" \
+        --permission "${{ inputs.permission }}"
   

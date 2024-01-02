@@ -25,9 +25,9 @@ runs:
     shell: bash
     run: |
       . ${GITHUB_ACTION_PATH}/script.sh \
-        -api_version ${{ inputs.api_version }} \
-        -token ${{ inputs.token }} \
-        -owner ${{ inputs.owner }} \
-        -repository ${{ inputs.repository }} \
-        -ruleset_path ${{ inputs.ruleset_path }}
+        --api_version "${{ inputs.api_version }}" \
+        --token "${{ inputs.token }}" \
+        --owner "${{ inputs.owner }}" \
+        --repository "${{ inputs.repository }}" \
+        --ruleset_path "${{ inputs.ruleset_path }}"
   
