@@ -13,8 +13,8 @@ get_query()
 {
 cat <<EOF
     mutation 
-    { 
-        linkRepositoryToProject
+    {
+        linkProjectV2ToRepository
         (
             input: 
             { 
@@ -24,8 +24,7 @@ cat <<EOF
         ) 
         { 
             clientMutationId 
-            project { id } 
-            repository { id } 
+            repository { id }
         } 
     }
 EOF
