@@ -22,6 +22,9 @@ inputs:
     description: |
       Either true to allow automatically deleting head branches 
       when pull requests are merged, or false to prevent automatic deletion.
+  allow_auto_merge:
+    description: |
+      Either true to allow auto-merge on pull requests, or false to disallow auto-merge.
   
 runs:
   using: composite
@@ -37,4 +40,5 @@ runs:
         --owner "${{ inputs.owner }}" \
         --name "${{ inputs.name }}" \
         --description "${{ inputs.description }}" \
-        --delete_branch_on_merge "${{ inputs.delete_branch_on_merge }}"
+        --delete_branch_on_merge "${{ inputs.delete_branch_on_merge }}" \
+        --allow_auto_merge "${{ inputs.allow_auto_merge }}"

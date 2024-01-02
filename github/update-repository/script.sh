@@ -9,6 +9,7 @@ while [ $# -gt 0 ] ; do
     --name) name=$2;;
     --description) description=$2;;
     --delete_branch_on_merge) delete_branch_on_merge=$2;;
+    --allow_auto_merge) allow_auto_merge=$2;;
   esac
   shift
 done
@@ -17,6 +18,7 @@ expressions=(
   '(if $name != "" then {name: $name} else {} end)'
   '(if $description != "" then {description: $description} else {} end)'
   '(if $delete_branch_on_merge != "" then {delete_branch_on_merge: $delete_branch_on_merge} else {} end)'
+  '(if $allow_auto_merge != "" then {allow_auto_merge: $allow_auto_merge} else {} end)'
 )
 
 expression=$(IFS='+'; echo "${expressions[*]}")
@@ -27,6 +29,7 @@ body=$(
     --arg name "$name" \
     --arg description "$description" \
     --arg delete_branch_on_merge "$delete_branch_on_merge" \
+    --arg allow_auto_merge "$allow_auto_merge" \
     "$expression" \
 )
 
