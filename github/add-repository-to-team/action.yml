@@ -36,11 +36,12 @@ runs:
   - name: 'API call'
     shell: bash
     run: |
-      curl -L \
-      -X PUT \
-      -H "Accept: application/vnd.github+json" \
-      -H "Authorization: Bearer ${{ inputs.token }}" \
-      -H "X-GitHub-Api-Version: ${{ inputs.api_version }}" \
-      https://api.github.com/orgs/${{ inputs.organization }}/teams/${{ inputs.team_slug }}/repos/${{ inputs.owner }}/${{ inputs.owner }} \
-      -d '{"permission":"${{ inputs.permission }}"}'
+      . ${GITHUB_ACTION_PATH}/script.sh \
+        -api_version ${{ inputs.api_version }} \
+        -token ${{ inputs.token }} \
+        -owner ${{ inputs.owner }} \
+        -repository ${{ inputs.repository }} \
+        -organization ${{ inputs.organization }} \
+        -team_slug ${{ inputs.team_slug }} \
+        -permission ${{ inputs.permission }}
   

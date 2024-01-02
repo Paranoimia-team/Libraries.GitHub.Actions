@@ -25,10 +25,8 @@ runs:
     id: api_call
     shell: bash
     run: |
-      result=$(curl -X POST \
-      -H "Authorization: Bearer ${{ inputs.token }}" \
-      -H "Content-Type: application/json" \
-      https://api.github.com/graphql \
-      --data '{ "query": "query { organization(login: ${{ inputs.organization }}) { projectV2(number: ${{ inputs.project }} ) { id } } }" }')
-
-      "result=$result" >> "$GITHUB_OUTPUT"
+      . ${GITHUB_ACTION_PATH}/script.sh \
+        -token ${{ inputs.token }} \
+        -organization ${{ inputs.organization }} \
+        -project ${{ inputs.project }}
+  
