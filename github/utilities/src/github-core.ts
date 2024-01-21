@@ -61,6 +61,11 @@ export async function run
     }
     catch(error)
     {
+        if (error instanceof Error)
+        {
+            core.error(error.cause as any);
+        }
+
         core.setFailed(error);
     }
 }
