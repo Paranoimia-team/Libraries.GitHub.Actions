@@ -1,4 +1,5 @@
 import * as core from "@actions/core";
+import * as system from "./system";
 
 export type GithubActionIoParameters = {
     [key: string]: string;
@@ -17,11 +18,11 @@ export function getInputs<TInputs extends GithubActionIoParameters>()
 
                 let value = target[key];
 
-                if (!value)
+                if (value === undefined)
                 {
                     value = core.getInput(key);
 
-                    target[key] = value;
+                    target[key] = value ? value : null;
                 }
 
                 return value;
@@ -63,7 +64,11 @@ export async function run
     {
         if (error instanceof Error)
         {
-            core.error(error.cause as any);
+            core.error(system.stringify(error.cause));
+        }
+        else
+        {
+            core.error(system.stringify(error));
         }
 
         core.setFailed(error);
