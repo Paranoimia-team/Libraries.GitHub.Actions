@@ -36,12 +36,10 @@ export function setOutputs<TOutputs extends GithubActionIoParameters>
     parameters: TOutputs
 )
 {
-    core.info("Setting outputs");
-
     for(const key in parameters)
     {
         core.info(`Setting output ${key}`);
-
+        
         core.setOutput(key, parameters[key]);
     }
 }
