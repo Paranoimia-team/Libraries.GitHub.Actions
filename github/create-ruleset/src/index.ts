@@ -32,7 +32,7 @@ await utilities.github_core.run<Inputs>
             );
 
             core.info(`PUT ${url}`);
-            core.info(`Body ${JSON.stringify(body)}`);
+            core.info(`Body ${utilities.system.stringify(body)}`);
 
             const response = await client.postJson
             (
@@ -49,7 +49,7 @@ await utilities.github_core.run<Inputs>
                 throw new Error("Unexpected API response", { cause: response });
             }
 
-            core.info(`Success ${JSON.stringify(response)}`);
+            core.info(`Success ${utilities.system.stringify(response)}`);
         }
         finally
         {

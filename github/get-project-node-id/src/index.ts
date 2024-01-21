@@ -64,7 +64,7 @@ await utilities.github_core.run<Inputs, Outputs>
             const url = "https://api.github.com/graphql";
 
             core.info(`PUT ${url}`);
-            core.info(`Body ${JSON.stringify(body)}`);
+            core.info(`Body ${utilities.system.stringify(body)}`);
 
             const response = await client.postJson<Response>(url, body);
 
@@ -73,7 +73,7 @@ await utilities.github_core.run<Inputs, Outputs>
                 throw new Error("Unexpected API response", { cause: response });
             }
 
-            core.info(`Success ${JSON.stringify(response)}`);
+            core.info(`Success ${utilities.system.stringify(response)}`);
 
             return {
                 node_id: response.result.data.organization.projectV2.id
