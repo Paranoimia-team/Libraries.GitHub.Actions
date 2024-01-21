@@ -15,18 +15,7 @@ inputs:
 outputs:
   node_id:
     description: "Project's node_id"
-    value: ${{ steps.api_call.outputs.node_id }}
 
 runs:
-  using: composite
-  steps:
-
-  - name: 'API call'
-    id: api_call
-    shell: bash
-    run: |
-      . ${GITHUB_ACTION_PATH}/script.sh \
-        --token "${{ inputs.token }}" \
-        --organization "${{ inputs.organization }}" \
-        --project "${{ inputs.project }}"
-  
+  using: node16
+  main: ${GITHUB_ACTION_PATH}/dist/index.js

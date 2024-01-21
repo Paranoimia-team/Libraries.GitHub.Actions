@@ -28,20 +28,7 @@ inputs:
       if the owning organization has defined any. 
       If no permission is specified, the team's permission attribute 
       will be used to determine what permission to grant the team on this repository.
-  
-runs:
-  using: composite
-  steps:
 
-  - name: 'API call'
-    shell: bash
-    run: |
-      . ${GITHUB_ACTION_PATH}/script.sh \
-        --api_version "${{ inputs.api_version }}" \
-        --token "${{ inputs.token }}" \
-        --owner "${{ inputs.owner }}" \
-        --repository "${{ inputs.repository }}" \
-        --organization "${{ inputs.organization }}" \
-        --team_slug "${{ inputs.team_slug }}" \
-        --permission "${{ inputs.permission }}"
-  
+runs:
+  using: node16
+  main: ${GITHUB_ACTION_PATH}/dist/index.js
