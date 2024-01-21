@@ -12,13 +12,5 @@ inputs:
     description: 'GitHub token'
   
 runs:
-  using: composite
-  steps:
-
-  - name: 'Link API'
-    shell: bash
-    run: |
-      . ${GITHUB_ACTION_PATH}/script.sh \
-        --token "${{ inputs.token }}" \
-        --repository "${{ inputs.repository }}" \
-        --project "${{ inputs.project }}"
+  using: node16
+  main: ${GITHUB_ACTION_PATH}/dist/index.js
