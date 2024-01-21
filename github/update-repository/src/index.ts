@@ -1,6 +1,7 @@
 import { HttpClient } from "@actions/http-client";
 import { PersonalAccessTokenCredentialHandler } from "@actions/http-client/lib/auth";
 import * as utilities from "@github/utilities";
+import * as core from "@actions/core";
 
 type Inputs = 
 {
@@ -38,13 +39,18 @@ await utilities.github_core.run<Inputs>
                 .setIfNotEmpty("allow_auto_merge", inputs.allow_auto_merge)
                 .setIfNotEmpty("delete_branch_on_merge", inputs.delete_branch_on_merge);
 
+            const url = utilities.http.buildUrl
+            (
+                "https://api.github.com/repos/{owner}/{repository}",
+                inputs
+            );
+
+            core.info(`PUT ${url}`);
+            core.info(`Body ${JSON.stringify(body)}`);
+
             const response = await client.patchJson
             (
-                utilities.http.buildUrl
-                (
-                    "https://api.github.com/repos/{owner}/{repository}",
-                    inputs
-                ),
+                url,
                 body,
                 {
                     accept: "application/vnd.github+json",
@@ -56,6 +62,8 @@ await utilities.github_core.run<Inputs>
             {
                 throw new Error("Unexpected API response", { cause: response });
             }
+
+            core.info(`Success ${JSON.stringify(response)}`);
         }
         finally
         {

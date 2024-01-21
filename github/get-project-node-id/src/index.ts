@@ -1,6 +1,7 @@
 import { HttpClient } from "@actions/http-client";
 import { PersonalAccessTokenCredentialHandler } from "@actions/http-client/lib/auth";
 import * as utilities from "@github/utilities";
+import * as core from "@actions/core";
 
 type Inputs = 
 {
@@ -60,17 +61,19 @@ await utilities.github_core.run<Inputs, Outputs>
             );
 
             const body: Body = { query };
+            const url = "https://api.github.com/graphql";
 
-            const response = await client.postJson<Response>
-            (
-                "https://api.github.com/graphql",
-                body
-            );
+            core.info(`PUT ${url}`);
+            core.info(`Body ${JSON.stringify(body)}`);
+
+            const response = await client.postJson<Response>(url, body);
 
             if (!utilities.http.isSuccessStatusCode(response.statusCode))
             {
                 throw new Error("Unexpected API response", { cause: response });
             }
+
+            core.info(`Success ${JSON.stringify(response)}`);
 
             return {
                 node_id: response.result.data.organization.projectV2.id
