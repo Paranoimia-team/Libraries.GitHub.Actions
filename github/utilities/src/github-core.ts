@@ -22,7 +22,7 @@ export function getInputs<TInputs extends GithubActionIoParameters>()
                 {
                     value = core.getInput(key);
 
-                    target[key] = value ? value : null;
+                    return (target[key] = value ? value : null);
                 }
 
                 return value;

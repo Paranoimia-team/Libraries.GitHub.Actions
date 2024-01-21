@@ -45,7 +45,7 @@ await utilities.github_core.run<Inputs>
                 inputs
             );
 
-            core.info(`PUT ${url}`);
+            core.info(`PATCH ${url}`);
             core.info(`Body ${utilities.system.stringify(body)}`);
 
             const response = await client.patchJson

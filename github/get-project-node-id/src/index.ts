@@ -63,7 +63,7 @@ await utilities.github_core.run<Inputs, Outputs>
             const body: Body = { query };
             const url = "https://api.github.com/graphql";
 
-            core.info(`PUT ${url}`);
+            core.info(`POST ${url}`);
             core.info(`Body ${utilities.system.stringify(body)}`);
 
             const response = await client.postJson<Response>(url, body);
