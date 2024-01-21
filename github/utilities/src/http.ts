@@ -45,13 +45,13 @@ export function buildUrl<TUrlTemplate extends string>
 
     const path = parts[0].replaceAll
     (
-        /\{([A-Za-z_\.-])+\}/g, 
+        /\{([A-Za-z_\.-]+)\}/g, 
         (full, name) => encodeURIComponent(parameters[name])
     );
 
     const query = parts[1]?.replaceAll
     (
-        /\{([A-Za-z_\.-])+\}/g, 
+        /\{([A-Za-z_\.-]+)\}/g, 
         (full, name) => `${encodeURIComponent(name)}=${encodeURIComponent(parameters[name])}`
     );
 
