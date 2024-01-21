@@ -73,11 +73,15 @@ await utilities.github_core.run<Inputs, Outputs>
                 throw new Error("Unexpected API response", { cause: response });
             }
 
-            core.info(`Success ${utilities.system.stringify(response)}`);
+            core.info(`Success ${utilities.system.stringify(response, 5)}`);
 
-            return {
+            const result = {
                 node_id: response.result.data.organization.projectV2.id
             };
+
+            core.info(utilities.system.stringify(result));
+
+            return result;
         }
         finally
         {
