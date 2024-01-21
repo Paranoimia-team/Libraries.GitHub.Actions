@@ -23,7 +23,9 @@ await utilities.github_core.run<Inputs>
         
         try
         {
-            const body = await fs.promises.readFile(inputs.ruleset_path, { encoding: "utf-8" });
+            const json = await fs.promises.readFile(inputs.ruleset_path, { encoding: "utf-8" });
+
+            const body = JSON.parse(json);
 
             const url = utilities.http.buildUrl
             (
