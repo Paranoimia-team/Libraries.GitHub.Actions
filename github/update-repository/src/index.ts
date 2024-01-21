@@ -63,7 +63,7 @@ await utilities.github_core.run<Inputs>
                 throw new Error("Unexpected API response", { cause: response });
             }
 
-            core.info(`Success ${utilities.system.stringify(response, )}`);
+            core.info(`Success ${utilities.system.stringify(response)}`);
         }
         finally
         {
